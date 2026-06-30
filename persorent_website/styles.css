@@ -479,3 +479,4 @@ input:focus, select:focus, textarea:focus { border-color: var(--primary); box-sh
   .mini-booking, .footer { flex-direction: column; align-items: flex-start; }
   .footer-links { flex-wrap: wrap; }
 }
+

@@ -34,3 +34,4 @@ No backend is included yet. The current listings are stored in browser memory on
 ## Important launch warning
 
 Before launching in India, verify legal compliance for vehicle rental, commercial registration, permits, insurance, PUC, deposits, dispute handling, data privacy and KYC consent. Do not allow illegal private-vehicle renting.
+

@@ -217,3 +217,4 @@ document.getElementById('confirmBookingBtn').addEventListener('click', () => {
 
 initializeDate();
 renderVehicles();
+
