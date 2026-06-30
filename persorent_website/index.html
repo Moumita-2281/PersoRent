@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PersoRent - Peer to Peer Vehicle Rental</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="navbar">
+      <a class="brand" href="#home" aria-label="PersoRent Home">
+        <span class="brand-icon">PR</span>
+        <span>PersoRent</span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#how">How it works</a>
+        <a href="#vehicles">Vehicles</a>
+        <a href="#list">List vehicle</a>
+        <a href="#safety">Safety</a>
+        <button class="btn btn-ghost" data-open-modal="loginModal">Login</button>
+        <button class="btn btn-primary" data-scroll="#vehicles">Rent now</button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <span class="eyebrow">Verified peer-to-peer vehicle rental</span>
+        <h1>Rent bikes and cars from real owners nearby.</h1>
+        <p>
+          PersoRent connects vehicle owners with renters through KYC verification,
+          secure deposits, photo proof, and simple booking protection.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary btn-large" data-scroll="#vehicles">Find a ride</button>
+          <button class="btn btn-secondary btn-large" data-scroll="#list">Earn from your vehicle</button>
+        </div>
+        <div class="hero-stats">
+          <div><strong>₹0</strong><span>Listing fee</span></div>
+          <div><strong>15%</strong><span>Platform fee</span></div>
+          <div><strong>4-step</strong><span>Damage proof</span></div>
+        </div>
+      </div>
+      <div class="hero-card" aria-label="Booking preview card">
+        <div class="floating-badge">Available today</div>
+        <div class="vehicle-visual bike"></div>
+        <h3>Yamaha MT-15</h3>
+        <p>Kestopur, Kolkata · 2.1 km away</p>
+        <div class="price-row">
+          <span>₹899/day</span>
+          <button class="btn btn-primary" data-book="Yamaha MT-15">Book</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="search-panel" aria-label="Vehicle search">
+      <div>
+        <label for="cityInput">City</label>
+        <input id="cityInput" type="text" value="Kolkata" />
+      </div>
+      <div>
+        <label for="typeFilter">Vehicle type</label>
+        <select id="typeFilter">
+          <option value="all">All</option>
+          <option value="bike">Bike</option>
+          <option value="scooter">Scooter</option>
+          <option value="car">Car</option>
+        </select>
+      </div>
+      <div>
+        <label for="dateInput">Pickup date</label>
+        <input id="dateInput" type="date" />
+      </div>
+      <button class="btn btn-primary" id="searchBtn">Search</button>
+    </section>
+
+    <section class="section" id="how">
+      <div class="section-heading">
+        <span class="eyebrow">Simple process</span>
+        <h2>How PersoRent works</h2>
+        <p>Built for safe handovers, clean proof, and fair payouts.</p>
+      </div>
+      <div class="steps-grid">
+        <article class="step-card">
+          <span>1</span>
+          <h3>Create account</h3>
+          <p>Choose owner or renter profile and complete basic details.</p>
+        </article>
+        <article class="step-card">
+          <span>2</span>
+          <h3>Complete KYC</h3>
+          <p>Verify Aadhaar, driving licence, selfie, and mobile number.</p>
+        </article>
+        <article class="step-card">
+          <span>3</span>
+          <h3>Book or list</h3>
+          <p>Owners list vehicles. Renters pay rent plus security deposit.</p>
+        </article>
+        <article class="step-card">
+          <span>4</span>
+          <h3>Photo proof</h3>
+          <p>Both sides upload before and after photos to detect damage.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section alt-section" id="vehicles">
+      <div class="section-heading split-heading">
+        <div>
+          <span class="eyebrow">Available rides</span>
+          <h2>Choose your vehicle</h2>
+          <p>Demo listings shown below. Connect a database later for real listings.</p>
+        </div>
+        <div class="filter-pills" id="filterPills">
+          <button class="pill active" data-filter="all">All</button>
+          <button class="pill" data-filter="bike">Bikes</button>
+          <button class="pill" data-filter="scooter">Scooters</button>
+          <button class="pill" data-filter="car">Cars</button>
+        </div>
+      </div>
+      <div class="vehicle-grid" id="vehicleGrid"></div>
+    </section>
+
+    <section class="section dashboard-section">
+      <div class="section-heading">
+        <span class="eyebrow">User dashboard</span>
+        <h2>One place for KYC, bookings and deposits</h2>
+      </div>
+      <div class="dashboard">
+        <aside class="dashboard-sidebar">
+          <button class="tab-btn active" data-tab="kyc">KYC Verification</button>
+          <button class="tab-btn" data-tab="bookings">My Bookings</button>
+          <button class="tab-btn" data-tab="deposits">Deposit Status</button>
+          <button class="tab-btn" data-tab="photos">Damage Photos</button>
+        </aside>
+        <div class="dashboard-content">
+          <div class="tab-panel active" id="kyc">
+            <h3>KYC status</h3>
+            <div class="status-card warning">
+              <strong>Pending verification</strong>
+              <p>Upload Aadhaar, driving licence, selfie, and emergency contact.</p>
+            </div>
+            <div class="kyc-list">
+              <label><input type="checkbox" checked /> Mobile OTP verified</label>
+              <label><input type="checkbox" /> Aadhaar offline e-KYC uploaded</label>
+              <label><input type="checkbox" /> Driving licence verified</label>
+              <label><input type="checkbox" /> Selfie match completed</label>
+            </div>
+            <button class="btn btn-primary" data-open-modal="kycModal">Start KYC</button>
+          </div>
+          <div class="tab-panel" id="bookings">
+            <h3>Upcoming booking</h3>
+            <div class="mini-booking">
+              <div>
+                <strong>Royal Enfield Classic 350</strong>
+                <p>Pickup: Today, 10:00 AM · Return: Tomorrow, 8:00 PM</p>
+              </div>
+              <span class="tag">Awaiting handover</span>
+            </div>
+          </div>
+          <div class="tab-panel" id="deposits">
+            <h3>Security deposit</h3>
+            <div class="money-card">
+              <span>Held safely</span>
+              <strong>₹3,000</strong>
+              <p>Refund after successful return or used for approved damage claim.</p>
+            </div>
+          </div>
+          <div class="tab-panel" id="photos">
+            <h3>Damage proof checklist</h3>
+            <div class="proof-grid">
+              <div>Front photo <span>Required</span></div>
+              <div>Back photo <span>Required</span></div>
+              <div>Left side <span>Required</span></div>
+              <div>Right side <span>Required</span></div>
+              <div>Odometer <span>Required</span></div>
+              <div>Fuel level <span>Required</span></div>
+            </div>
+            <button class="btn btn-secondary" data-open-modal="photoModal">Upload demo photos</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="list">
+      <div class="section-heading split-heading">
+        <div>
+          <span class="eyebrow">Owner form</span>
+          <h2>List your vehicle</h2>
+          <p>Add your unused bike, scooter or car and earn when it is booked.</p>
+        </div>
+        <span class="commission-badge">You earn 85%</span>
+      </div>
+      <form class="listing-form" id="listingForm">
+        <div class="form-row">
+          <label>Vehicle name
+            <input name="vehicleName" type="text" placeholder="Example: Honda Activa 6G" required />
+          </label>
+          <label>Vehicle type
+            <select name="vehicleType" required>
+              <option value="bike">Bike</option>
+              <option value="scooter">Scooter</option>
+              <option value="car">Car</option>
+            </select>
+          </label>
+        </div>
+        <div class="form-row">
+          <label>Daily price ₹
+            <input name="price" type="number" min="100" placeholder="899" required />
+          </label>
+          <label>Security deposit ₹
+            <input name="deposit" type="number" min="500" placeholder="3000" required />
+          </label>
+        </div>
+        <div class="form-row">
+          <label>Location
+            <input name="location" type="text" placeholder="Kestopur, Kolkata" required />
+          </label>
+          <label>Available from
+            <input name="available" type="date" required />
+          </label>
+        </div>
+        <label>Description
+          <textarea name="description" rows="4" placeholder="Mention condition, mileage, helmet availability, pickup rules..." required></textarea>
+        </label>
+        <button class="btn btn-primary btn-large" type="submit">Submit listing for approval</button>
+        <p class="form-note" id="listingNote">Admin approval required before the vehicle appears live.</p>
+      </form>
+    </section>
+
+    <section class="section safety-section" id="safety">
+      <div class="section-heading">
+        <span class="eyebrow">Trust and safety</span>
+        <h2>Important checks before launch</h2>
+        <p>These are must-have rules for a real marketplace in India.</p>
+      </div>
+      <div class="safety-grid">
+        <article>
+          <h3>Legal vehicle usage</h3>
+          <p>Do not allow illegal private-vehicle renting. Check RC, permit, insurance, PUC and local rules before approving any listing.</p>
+        </article>
+        <article>
+          <h3>Human review</h3>
+          <p>Use bot verification for speed, but keep admin review for risky accounts, fake documents, disputes and high-value cars.</p>
+        </article>
+        <article>
+          <h3>Damage dispute rules</h3>
+          <p>Require timestamped photos, odometer image, fuel image, pickup OTP, return OTP, and clear claim deadline.</p>
+        </article>
+        <article>
+          <h3>Secure payments</h3>
+          <p>Hold rent and deposits separately. Release owner payout only after return confirmation or dispute resolution.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div>
+      <a class="brand" href="#home"><span class="brand-icon">PR</span><span>PersoRent</span></a>
+      <p>Peer-to-peer vehicle rental platform prototype.</p>
+    </div>
+    <div class="footer-links">
+      <a href="#how">How it works</a>
+      <a href="#vehicles">Vehicles</a>
+      <a href="#safety">Safety</a>
+    </div>
+  </footer>
+
+  <div class="modal" id="loginModal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" data-close-modal>×</button>
+      <h2>Login to PersoRent</h2>
+      <p>Choose account type to continue.</p>
+      <div class="role-grid">
+        <button class="role-card" data-role="renter">I want to rent</button>
+        <button class="role-card" data-role="owner">I want to list</button>
+      </div>
+      <form class="auth-form">
+        <label>Mobile number
+          <input type="tel" placeholder="+91 98765 43210" />
+        </label>
+        <label>Password
+          <input type="password" placeholder="••••••••" />
+        </label>
+        <button class="btn btn-primary" type="button" data-close-modal>Continue</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" id="bookingModal" aria-hidden="true">
+    <div class="modal-card booking-modal-card">
+      <button class="modal-close" data-close-modal>×</button>
+      <h2 id="bookingTitle">Book vehicle</h2>
+      <div class="booking-summary">
+        <div><span>Rent</span><strong id="rentAmount">₹899</strong></div>
+        <div><span>Security deposit</span><strong id="depositAmount">₹3,000</strong></div>
+        <div><span>Platform fee</span><strong id="feeAmount">₹135</strong></div>
+      </div>
+      <ol class="booking-checklist">
+        <li>Renter KYC verified</li>
+        <li>Owner confirms pickup slot</li>
+        <li>Before-handover photos uploaded</li>
+        <li>Payment and deposit held safely</li>
+      </ol>
+      <button class="btn btn-primary btn-large" id="confirmBookingBtn">Pay and request booking</button>
+      <p class="form-note" id="bookingNote"></p>
+    </div>
+  </div>
+
+  <div class="modal" id="kycModal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" data-close-modal>×</button>
+      <h2>Start KYC</h2>
+      <p>This demo shows the flow. Real KYC needs a compliant API provider and user consent.</p>
+      <form class="auth-form">
+        <label>Aadhaar offline XML / share code
+          <input type="text" placeholder="Upload or enter reference" />
+        </label>
+        <label>Driving licence number
+          <input type="text" placeholder="WB00 00000000000" />
+        </label>
+        <label>Selfie
+          <input type="file" accept="image/*" />
+        </label>
+        <button class="btn btn-primary" type="button" data-close-modal>Submit for verification</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" id="photoModal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" data-close-modal>×</button>
+      <h2>Upload vehicle proof</h2>
+      <p>Upload before and after photos to protect both owner and renter.</p>
+      <form class="auth-form">
+        <label>Front + back photos
+          <input type="file" accept="image/*" multiple />
+        </label>
+        <label>Side photos
+          <input type="file" accept="image/*" multiple />
+        </label>
+        <label>Odometer + fuel level
+          <input type="file" accept="image/*" multiple />
+        </label>
+        <button class="btn btn-primary" type="button" data-close-modal>Upload proof</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
